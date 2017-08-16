@@ -1,0 +1,148 @@
+heat_template_version: 2015-04-30
+
+description: >
+  Software Config to drive os-net-config to configure multiple interfaces
+  for the compute role.
+
+parameters:
+  DnsServers:
+    default: [] 
+    type: comma_delimited_list
+  ControlPlaneIp:
+    default: ''
+    type: string
+  ContrailPlaneSubnetCidr:
+    default: ''
+    type: string
+  EC2MetadataIp:
+    default: ''
+    type: string
+  ExternalIpSubnet:
+    default: ''
+    type: string
+  ExternalInterfaceDefaultRoute:
+    default: ''
+    type: string
+  ServiceIpSubnet:
+    default: ''
+    type: string
+  StorageIpSubnet:
+    default: ''
+    type: string
+  StorageMgmtIpSubnet:
+    default: ''
+    type: string
+  InternalApiIpSubnet:
+    default: ''
+    type: string
+  TenantIpSubnet:
+    default: ''
+    description: IP address/subnet on the tenant network
+    type: string
+  TenantNetworkVlanID:
+    default: 4037
+    description: Vlan ID for the tenant network traffic.
+    type: number
+  ManagementIpSubnet: # Only populated when including environments/network-management.yaml
+    default: ''
+    description: IP address/subnet on the management network
+    type: string
+  ManagementNetworkVlanID:
+    default: 170
+    description: Vlan ID for the management network traffic.
+    type: number
+  ManagementInterfaceDefaultRoute: # Commented out by default in this template
+    default: unset
+    description: The default route of the management network.
+    type: string
+  ControlPlaneSubnetCidr:
+    default: ''
+    type: string
+
+resources:
+  OsNetConfigImpl:
+    type: OS::Heat::StructuredConfig
+    properties:
+      group: os-apply-config
+      config:
+        os_net_config:
+          network_config:
+            -
+              type: interface
+              name: eth0
+              use_dhcp: false
+              dns_servers: {get_param: DnsServers}
+              addresses:
+                -
+                  ip_netmask:
+                    list_join:
+                      - '/'
+                      - - {get_param: ControlPlaneIp}
+                        - {get_param: ControlPlaneSubnetCidr}
+              routes:
+                -
+                  ip_netmask: 169.254.169.254/32
+                  next_hop: {get_param: EC2MetadataIp}
+            -
+              type: interface
+              name: eth1
+              use_dhcp: false
+              addresses:
+                -
+                  ip_netmask: {get_param: ExternalIpSubnet}
+              routes:
+                -
+                  default: true
+                  next_hop: {get_param: ExternalInterfaceDefaultRoute}
+#            -
+#              type: interface
+#              name: eth2
+#              use_dhcp: false
+#              addresses:
+#                -
+#                  ip_netmask: {get_param: ServiceIpSubnet}
+#            -
+#              type: interface
+#              name: eth5
+#              use_dhcp: false
+#              addresses:
+#                -
+#                  ip_netmask: {get_param: StorageIpSubnet}
+#            -
+#              type: interface
+#              name: eth6
+#              use_dhcp: false
+#              addresses:
+#                -
+#                  ip_netmask: {get_param: StorageMgmtIpSubnet}
+            -
+              type: interface
+              name: eth2
+              use_dhcp: false
+              addresses:
+                -
+                  ip_netmask: {get_param: InternalApiIpSubnet}
+
+            -
+              type: interface
+              name: eth3
+              use_dhcp: false
+              mtu: 9000
+              #              vlan_id: {get_param: TenantNetworkVlanID}
+              addresses:
+                -
+                  ip_netmask: {get_param: TenantIpSubnet}
+
+            -
+              type: interface
+              name: eth4
+              use_dhcp: false
+              #              vlan_id: {get_param: ManagementNetworkVlanID}
+              addresses:
+                -
+                  ip_netmask: {get_param: ManagementIpSubnet}
+
+outputs:
+  OS::stack_id:
+    description: The OsNetConfigImpl resource.
+    value: {get_resource: OsNetConfigImpl}

@@ -1,0 +1,75 @@
+resource_registry:
+  OS::TripleO::Compute::Net::SoftwareConfig: contrail-nic-config-compute-bond-vlan.yaml
+  OS::TripleO::Controller::Net::SoftwareConfig: controller.yaml
+  OS::TripleO::ContrailController::Net::SoftwareConfig: contrail-nic-config.yaml
+  OS::TripleO::ContrailAnalytics::Net::SoftwareConfig: contrail-nic-config.yaml
+  OS::TripleO::ContrailAnalyticsDatabase::Net::SoftwareConfig: contrail-nic-config.yaml
+  OS::TripleO::ContrailTsn::Net::SoftwareConfig: contrail-nic-config-compute-bond-vlan.yaml
+  OS::TripleO::ContrailDpdk::Net::SoftwareConfig: contrail-nic-config-compute-bond-vlan.yaml
+
+parameter_defaults:
+  # Provisioning network addresssing.
+  ControlPlaneSubnetCidr: '24'
+  ControlPlaneDefaultRoute: 192.168.2.1
+  EC2MetadataIp: 192.168.2.2  # Generally the IP of the Undercloud
+  #
+  # Internal API
+  # No default route
+  InternalApiNetCidr: 10.30.7.0/24
+  InternalApiAllocationPools: [{'start': '10.30.7.50', 'end': '10.30.7.200'}]
+  InternalApiNetworkVlanID: 4033
+  InternalApiDefaultRoute: 10.30.7.39
+  #
+  # Management Network
+  # Default route
+  ManagementNetworkVlanID : 264
+  ManagementNetCidr: 10.241.162.0/24
+  ManagementAllocationPools: [{'start': '10.241.162.130', 'end': '10.241.162.240'}]
+  ManagementInterfaceDefaultRoute: 10.241.162.1
+  #
+  # External Network (Public API)
+  # Default route
+  ExternalNetCidr: 10.30.13.0/24
+  ExternalNetworkVlanID: 4039
+  ExternalAllocationPools: [{'start': '10.30.13.30', 'end': '10.30.13.200'}]
+  ExternalInterfaceDefaultRoute: 10.30.13.1
+  #
+  # Services Network
+  #
+  ServicesNetCidr: 10.30.15.0/24
+  ServicesNetworkVlanID: 4042
+  ServicesNetAllocationPools: [{'start': '10.30.15.46', 'end': '10.30.15.200'}]
+  DnsServers: ["10.30.7.253","10.30.7.254"]
+  #
+  # Storage Network
+  #
+  StorageNetCidr: 10.30.4.0/24
+  StorageAllocationPools: [{'start': '10.30.4.50', 'end': '10.30.4.200'}]
+  StorageNetworkVlanID: 4030
+  #
+  # Storage Management Network
+  #
+  StorageMgmtNetCidr: 10.30.5.0/24
+  StorageMgmtNetCidrServicesNetCidr: 10.30.15.0/24
+  StorageMgmtNetworkVlanID: 4031
+  StorageMgmtAllocationPools: [{'start': '10.30.5.46', 'end': '10.30.5.200'}]
+  #
+  # Tenancy Network
+  #
+  TenantNetCidr: 10.30.11.0/24
+  TenantNetworkVlanID: 4037
+  TenantAllocationPools: [{'start': '10.30.11.50', 'end': '10.30.11.200'}]
+  DnsServers: ["8.8.8.8", "10.30.7.253"]
+  # 10.30.7.254
+  # vrouter settings.
+  VrouterPhysicalInterface: vlan4033
+  VrouterGateway: 10.30.7.39
+  VrouterNetmask: 255.255.255.0
+  ControlVirtualInterface: eth0
+  PublicVirtualInterface: eth1
+  VlanParentInterface: bond0 # If VrouterPhysicalInterface is a vlan interface using vlanX notation
+  BondInterface: bond0
+  BondInterfaceMembers: 'eno49,eno50'
+#  # Customize bonding options, e.g. "mode=4 lacp_rate=1 updelay=1000 miimon=100"
+#  BondInterfaceOvsOptions2: "bond_mode=active-backup"
+#  BondInterfaceOvsOptions: "lacp=active bond_mode=balance-tcp"

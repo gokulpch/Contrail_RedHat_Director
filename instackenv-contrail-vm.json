@@ -1,0 +1,79 @@
+{
+    "nodes":[
+        {
+            "mac":[
+                "00:1a:4a:16:01:85"
+            ],
+            "name": "ehccontrail-controller01",
+            "pm_type":"fake_pxe",
+            "pm_addr":"192.168.2.26"
+        },
+        {
+            "mac":[
+                "00:1a:4a:16:01:89"
+            ],
+            "name": "ehccontrail-controller02",
+            "pm_type":"fake_pxe",
+            "pm_addr":"192.168.2.27"
+        },
+        {
+            "mac":[
+                "00:1a:4a:16:01:d5"
+            ],
+            "name": "ehccontrail-controller03",
+            "pm_type":"fake_pxe",
+            "pm_addr":"192.168.2.28"
+        },
+        {
+            "mac":[
+                "00:1a:4a:16:01:8d"
+            ],
+            "name": "ehccontrail-analytics01",
+            "pm_type":"fake_pxe",
+            "pm_addr":"192.168.2.29"
+        },
+        {
+            "mac":[
+                "00:1a:4a:16:01:93"
+            ],
+            "name": "ehccontrail-analytics02",
+            "pm_type":"fake_pxe",
+            "pm_addr":"192.168.2.30"
+        },
+        {
+            "mac":[
+                "00:1a:4a:16:01:9b"
+            ],
+            "name": "ehccontrail-analytics03",
+            "pm_type":"fake_pxe",
+            "pm_addr":"192.168.2.31"
+        },
+        {
+            "mac":[
+                "00:1a:4a:16:01:a3"
+            ],
+            "name": "ehccontrail-analyticsdb01",
+            "pm_type":"fake_pxe",
+            "pm_addr":"192.168.2.32"
+        },
+        {
+            "mac":[
+                "00:1a:4a:16:01:ab"
+            ],
+            "name": "ehccontrail-analyticsdb02",
+            "pm_type":"fake_pxe",
+            "pm_addr":"192.168.2.33"
+        },
+        {
+            "mac":[
+                "00:1a:4a:16:01:bb"
+            ],
+            "name": "ehccontrail-analyticsdb03",
+            "pm_type":"fake_pxe",
+            "pm_addr":"192.168.2.34"
+        }
+
+
+
+    ]
+}

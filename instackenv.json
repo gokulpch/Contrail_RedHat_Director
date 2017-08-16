@@ -1,0 +1,104 @@
+{
+    "nodes":[
+        {
+            "mac":[
+                "14:02:ec:8f:ad:af"
+            ],
+            "name": "ehccontroller0001",
+            "pm_type":"pxe_ipmitool",
+            "pm_user":"administrator",
+            "pm_password":"dqm@50vnc",
+            "pm_addr":"10.241.162.16"
+        },
+        {
+            "mac":[
+                "14:02:ec:6e:d5:d3"
+            ],
+            "name": "ehccontroller0002",
+            "pm_type":"pxe_ipmitool",
+            "pm_user":"administrator",
+            "pm_password":"dqm@50vnc",
+            "pm_addr":"10.241.162.18"
+        },
+        {
+            "mac":[
+                "14:02:ec:6e:d4:47"
+            ],
+            "name": "ehccontroller0003",
+            "pm_type":"pxe_ipmitool",
+            "pm_user":"administrator",
+            "pm_password":"dqm@50vnc",
+            "pm_addr":"10.241.162.20"
+        },
+        {
+            "mac":[
+                "14:02:ec:6e:d0:88"
+            ],
+            "name": "ehccompute0001",
+            "pm_type":"pxe_ipmitool",
+            "pm_user":"administrator",
+            "pm_password":"dqm@50vnc",
+            "pm_addr":"10.241.162.80"
+        },
+        {
+            "mac":[
+                "14:02:ec:6e:d2:60"
+            ],
+            "name": "ehccompute0002",
+            "pm_type":"pxe_ipmitool",
+            "pm_user":"administrator",
+            "pm_password":"dqm@50vnc",
+            "pm_addr":"10.241.162.82"
+        },
+        {
+            "mac":[
+                "14:02:ec:6e:d0:dc"
+            ],
+            "name": "ehccompute0003",
+            "pm_type":"pxe_ipmitool",
+            "pm_user":"administrator",
+            "pm_password":"dqm@50vnc",
+            "pm_addr":"10.241.162.84"
+        },
+        {
+            "mac":[
+                "14:02:ec:8f:ad:50"
+            ],
+            "name": "ehccompute0004",
+            "pm_type":"pxe_ipmitool",
+            "pm_user":"administrator",
+            "pm_password":"dqm@50vnc",
+            "pm_addr":"10.241.162.86"
+        },
+        {
+            "mac":[
+                "14:02:ec:6e:d0:e3"
+            ],
+            "name": "ehcceph0001",
+            "pm_type":"pxe_ipmitool",
+            "pm_user":"administrator",
+            "pm_password":"dqm@50vnc",
+            "pm_addr":"10.241.162.48"
+        },
+        {
+            "mac":[
+                "14:02:ec:6e:d1:e3"
+            ],
+            "name": "ehcceph0002",
+            "pm_type":"pxe_ipmitool",
+            "pm_user":"administrator",
+            "pm_password":"dqm@50vnc",
+            "pm_addr":"10.241.162.50"
+        },
+        {
+            "mac":[
+                "14:02:ec:6e:d2:67"
+            ],
+            "name": "ehcceph0003",
+            "pm_type":"pxe_ipmitool",
+            "pm_user":"administrator",
+            "pm_password":"dqm@50vnc",
+            "pm_addr":"10.241.162.52"
+        }
+    ]
+}
